@@ -1,13 +1,16 @@
 #include <iostream>
+#include "renderer.h"
+#include <string>
+#include <memory>
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-    std::cout << "Here are you arguments:" << std::endl;
+    std::string name {argc > 1 ? argv[1]: "WalrusRenderer"};
 
-    for (int i = 1; i < argc; i++) {
-        std::cout << argv[i] << std::endl;
-    }
-    
+    const std::unique_ptr<WalrusRenderer::Renderer> renderer = std::make_unique<WalrusRenderer::Renderer>(WalrusRenderer::RendererSettings{name});
+
+    renderer->Init();
+    renderer->Run();
 
     return 0;
 }
