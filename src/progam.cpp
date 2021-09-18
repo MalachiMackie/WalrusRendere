@@ -1,7 +1,9 @@
 #include <iostream>
-#include "renderer.h"
 #include <string>
 #include <memory>
+
+#include "renderer.h"
+#include <GLFW/glfw3.h>
 
 int main(int argc, char *argv[])
 {

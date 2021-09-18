@@ -1,18 +1,40 @@
 workspace "WalrusRenderer"
     configurations {"Debug", "Release"}
 
-project "WalrusRenderer"
-    kind "ConsoleApp"
-    language "C++"
-    targetdir "bin/%{cfg.buildcfg}"
+    outputdir = "%{cfg.buildcfg}"
 
-    files {"**.h", "**.cpp"}
+    include "vendor/GLFW"
 
-    filter "configurations:Debug"
-        defines {"DEBUG"}
-        symbols "On"
+    project "WalrusRenderer"
+        kind "ConsoleApp"
+        language "C++"
+        cppdialect "C++17"
+        staticruntime "off"
 
-    filter "configurations:Release"
-        defines {"NDEBUG"}
-        optimize "ON"
+        targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
+        objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
+
+        files {
+            "src/**.h",
+            "src/**.cpp"
+        }
+
+        defines {
+            "GLFW_INCLUDE_NONE"
+        }
+
+        includedirs {
+            "src",
+            "vendor/GLFW/include"
+        }
+
+        links {"GLFW"}
+        
+        filter "configurations:Debug"
+            defines {"DEBUG"}
+            symbols "On"
+
+        filter "configurations:Release"
+            defines {"NDEBUG"}
+            optimize "ON"
     
