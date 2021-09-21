@@ -1,3 +1,6 @@
 [submodule "vendor/GLFW"]
 	path = vendor/GLFW
 	url = ../glfw.git
+[submodule "vendor/pkgconfig"]
+	path = vendor/pkgconfig
+	url = https://github.com/tarruda/premake-pkgconfig
