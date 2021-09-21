@@ -4,6 +4,7 @@ workspace "WalrusRenderer"
     outputdir = "%{cfg.buildcfg}"
 
     include "vendor/GLFW"
+    include "vendor/Glad"
 
     project "WalrusRenderer"
         kind "ConsoleApp"
@@ -25,10 +26,16 @@ workspace "WalrusRenderer"
 
         includedirs {
             "src",
-            "vendor/GLFW/include"
+            "vendor/GLFW/include",
+            "vendor/Glad/include"
         }
 
-        links {"GLFW"}
+        links {
+            "GLFW",
+            "Glad",
+            "dl",
+            "pthread"
+        }   
         
         filter "configurations:Debug"
             defines {"DEBUG"}

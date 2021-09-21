@@ -3,7 +3,6 @@
 #include <memory>
 
 #include "renderer.h"
-#include <GLFW/glfw3.h>
 
 int main(int argc, char *argv[])
 {
@@ -11,8 +10,17 @@ int main(int argc, char *argv[])
 
     const std::unique_ptr<WalrusRenderer::Renderer> renderer = std::make_unique<WalrusRenderer::Renderer>(WalrusRenderer::RendererSettings{name});
 
-    renderer->Init();
+    int32_t initResult = renderer->Init();
+    if (initResult != 0)
+    {
+        std::cout << "Initializing Renderer Failed with code " << initResult << std::endl;
+        return initResult;
+    }
+
+    renderer->NewWindow("My Window");
     renderer->Run();
+
+    renderer->Destroy();
 
     return 0;
 }
